@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimmonsToolsLab2.CSharp", "TimmonsToolsLab2.CSharp.csproj", "{E7B921E5-C348-B4BE-0691-70D367B91946}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimmonsToolsLab2.CSharp.Editor", "TimmonsToolsLab2.CSharp.Editor.csproj", "{581BB381-8542-42D4-D3F5-EE63F2459396}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E7B921E5-C348-B4BE-0691-70D367B91946}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7B921E5-C348-B4BE-0691-70D367B91946}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7B921E5-C348-B4BE-0691-70D367B91946}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7B921E5-C348-B4BE-0691-70D367B91946}.Release|Any CPU.Build.0 = Release|Any CPU
+		{581BB381-8542-42D4-D3F5-EE63F2459396}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{581BB381-8542-42D4-D3F5-EE63F2459396}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{581BB381-8542-42D4-D3F5-EE63F2459396}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{581BB381-8542-42D4-D3F5-EE63F2459396}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
