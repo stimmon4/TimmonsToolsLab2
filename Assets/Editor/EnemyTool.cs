@@ -13,9 +13,17 @@ public class EnemyTool : EditorWindow
     int currentChoice = 0;
     int ourHealth;
     int lastRoyce;
+    int ourAgility;
+    int ourAttack;
+    int ourDefense;
+    int ourManaPool;
 
+    float ourAttackSpeed;
+
+    bool isMagicUser = false;
     bool nameFlag = false;
     bool nameExists = false;
+    bool spriteFlag = false;
 
     string ourName = "";
 
@@ -43,6 +51,15 @@ public class EnemyTool : EditorWindow
         ourSprite = EditorGUILayout.ObjectField(ourSprite, typeof(Sprite), false) as Sprite;
         ourName = EditorGUILayout.TextField("Name: ", ourName);
         ourHealth = EditorGUILayout.IntSlider("Health", ourHealth, 1, 300);
+        ourAgility = EditorGUILayout.IntSlider("Agility", ourAgility, 1, 100);
+        ourAttack = EditorGUILayout.IntSlider("Attack", ourAttack, 1, 100);
+        ourDefense = EditorGUILayout.IntSlider("Defense", ourDefense, 1, 100);
+        ourAttackSpeed = EditorGUILayout.Slider("Attack Speed", ourAttackSpeed, 1, 20);
+        isMagicUser = EditorGUILayout.Toggle("Magic User", isMagicUser);
+        if (isMagicUser)
+        {
+            ourManaPool = EditorGUILayout.IntSlider("Mana", ourManaPool, 1, 100);
+        }
         if (currentChoice == 0)
         {
             if (GUILayout.Button("Create"))
@@ -77,6 +94,10 @@ public class EnemyTool : EditorWindow
         {
             EditorGUILayout.HelpBox("Asset already exists, enter a different name", MessageType.Error);
         }
+        if (spriteFlag)
+        {
+            EditorGUILayout.HelpBox("Sprite cannot be blank", MessageType.Error);
+        }
     }
 	void GetEmenies()
     {
@@ -97,8 +118,16 @@ public class EnemyTool : EditorWindow
     {
         ourHealth = 1;
         ourName = "";
+        ourSprite = null;
+        ourAgility = 1;
+        ourAttack = 1;
+        ourDefense = 1;
+        ourAttackSpeed = 1;
+        isMagicUser = false;
+        ourManaPool = 1;
         nameExists = false;
         nameFlag = false;
+        spriteFlag = false;
     }
 
     void CurrentEmeny()
@@ -106,19 +135,38 @@ public class EnemyTool : EditorWindow
         ourName = emenyList[currentChoice - 1].emname;
         ourHealth = emenyList[currentChoice - 1].health;
         ourSprite = emenyList[currentChoice - 1].mySprite;
+        ourAgility = emenyList[currentChoice - 1].agi;
+        ourAttack = emenyList[currentChoice - 1].atk;
+        ourDefense = emenyList[currentChoice - 1].def;
+        ourAttackSpeed = emenyList[currentChoice - 1].atkTime;
+        isMagicUser = emenyList[currentChoice - 1].isMagic;
+        ourManaPool = emenyList[currentChoice - 1].manaPool;
     }
     void SaveCurrentEmeny()
     {
         emenyList[currentChoice - 1].emname = ourName;
         emenyList[currentChoice - 1].health = ourHealth;
         emenyList[currentChoice - 1].mySprite = ourSprite;
+        emenyList[currentChoice - 1].agi = ourAgility;
+        emenyList[currentChoice - 1].atk = ourAttack;
+        emenyList[currentChoice - 1].def = ourDefense;
+        emenyList[currentChoice - 1].atkTime = ourAttackSpeed;
+        emenyList[currentChoice - 1].isMagic = isMagicUser;
+        emenyList[currentChoice - 1].manaPool = ourManaPool;
+        EditorUtility.SetDirty(emenyList[currentChoice - 1]);
+        AssetDatabase.SaveAssets();
     }
 
     void CreateEmeny()
     {
-        if(ourName == "")
+        if (string.IsNullOrEmpty(ourName))
         {
             nameFlag = true;
+        }
+        
+        else if(ourSprite == null)
+        {
+            spriteFlag = true;
         }
         else
         {
@@ -130,6 +178,12 @@ public class EnemyTool : EditorWindow
             ourEmeny.emname = ourName;
             ourEmeny.health = ourHealth;
             ourEmeny.mySprite = ourSprite;
+            ourEmeny.agi = ourAgility;
+            ourEmeny.atk = ourAttack;
+            ourEmeny.def = ourDefense;
+            ourEmeny.atkTime = ourAttackSpeed;
+            ourEmeny.isMagic = isMagicUser;
+            ourEmeny.manaPool = ourManaPool;
             AssetDatabase.CreateAsset(ourEmeny, "Assets/Resources/Data/EnemyData/" + ourEmeny.emname.Replace(" ", "_") + ".asset");
             nameFlag = false;
             NewEmeny();
